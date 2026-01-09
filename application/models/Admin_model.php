@@ -4,20 +4,20 @@ class Admin_model extends CI_Model
 {
     public function getSession()
     {
-        return $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        return $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
     }
 
     public function getAllAdmin()
     {
-        return $this->db->get('admin')->result_array();
+        return $this->db->get('user')->result_array();
     }
 
     public function getAdminById($id)
     {
-        return $this->db->get_where('admin', ['id' => $id])->row_array();
+        return $this->db->get_where('user', ['id' => $id])->row_array();
     }
 
-    public function tambah()
+    public function tambahUser()
     {
         $username = $this->input->post('username', true);
         $password = $this->input->post('password', true);
@@ -29,15 +29,15 @@ class Admin_model extends CI_Model
             'role_id' => $role_id
         );
 
-        $this->db->insert('admin', $data);
+        $this->db->insert('user', $data);
     }
 
-    public function hapusAdmin($id)
+    public function hapusUser($id)
     {
-        $this->db->delete('admin', ['id' => $id]);
+        $this->db->delete('user', ['id' => $id]);
     }
 
-    public function editAdmin()
+    public function editUser()
     {
         $data = [
             "username" => $this->input->post('username', true),
@@ -46,9 +46,21 @@ class Admin_model extends CI_Model
         ];
 
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('admin', $data);
+        $this->db->update('user', $data);
     }
 
+    public function countUser()
+    {
+        return $this->db->get('user')->num_rows();
+    }
 
-    // Register BNN
+    public function countP4gn()
+    {
+        return $this->db->get('tb_sosilisas_p4gn')->num_rows();
+    }
+
+    public function countUrin()
+    {
+        return $this->db->get('tb_tes_urine')->num_rows();
+    }
 }
