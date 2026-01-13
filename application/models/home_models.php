@@ -66,6 +66,15 @@ class Home_models extends CI_Model {
 
         $this->db->insert('tb_tes_urine', $data);
     }
+    public function hapusP4gn($id)
+    {
+        $this->db->delete('tb_sosilisas_p4gn', ['id' => $id]);
+    }
+
+    public function hapusUrin($id)
+    {
+        $this->db->delete('tb_tes_urine', ['id' => $id]);
+    }
 
     public function getDataP4gnById($id){
         return $this->db->get_where('tb_sosilisas_p4gn', ['id' => $id])->row_array();
